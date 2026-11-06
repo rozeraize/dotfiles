@@ -1,0 +1,47 @@
+# Set classic root window cursor
+xsetroot -cursor_name X_cursor
+
+# Merge defaults
+xrdb -merge $HOME/.Xdefaults
+
+# The below export will make Qt5 applications use the GTK font style
+export XDG_CURRENT_DESKTOP=lxde
+
+# Clock/Meter style
+SMALLMETERS=0
+
+# Background Colours
+#ROOTCOL="#30445E"
+#ROOTCOL="#40546E"
+#ROOTCOL="#50647E"
+#ROOTCOL="cadetblue"
+#ROOTCOL="teal"
+#ROOTCOL="darkcyan"
+#ROOTCOL="darkslategray"
+#ROOTCOL="steelblue4"
+#ROOTCOL="#46749B"
+#ROOTCOL="#30445E"
+ROOTCOL="#40546E"
+#ROOTCOL="webgray"
+#ROOTCOL="steelblue"
+
+# Clock and Load backgrounds
+#BGCOL="slategray"
+BGCOL="gray"
+#BGCOL="steelblue"
+#BGCOL="$ROOTCOL"
+
+# Clock and Load foregrounds
+FGCOL="black"
+#FGCOL="darkslategray"
+#FGCOL="#004070"
+
+xsetroot -solid "$ROOTCOL"
+
+if [ $SMALLMETERS = 1 ]; then
+  # Clock: Small
+  exec xclock -digital -strftime "%H:%M" -face "Terminus:size=10" -bg "$BGCOL" -fg "$FGCOL" -geometry 45x15-0-0 -padding 0 &
+else
+  # Clock: Large
+  exec xclock -digital -strftime "   %H:%M" -face "Liberation Mono:size=13" -bg "$BGCOL" -fg "$FGCOL" -geometry 119x30-0+0 -padding 5 &
+fi
