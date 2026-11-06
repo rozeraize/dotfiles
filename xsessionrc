@@ -1,0 +1,5 @@
+if [ "$DESKTOP_SESSION" = "ctwm" ] || [ "$GDMSESSION" = "ctwm" ]; then
+    if [ -f "$HOME/.xprofile" ]; then
+        . "$HOME/.xprofile"
+    fi
+fi
