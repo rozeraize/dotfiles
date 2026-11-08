@@ -708,44 +708,27 @@ define(`bindir',`/home/vins/bin')
 ##################################
 
 syscmd(/usr/X11R7/libexec/ctwm_app_menu)
-
-menu "appmenu"
+# Workspace submenu: Graphics
+menu "gfx"
 {
-    "pkgsrc Applications"	f.title
-    " Games"			f.menu "Games"
-    " Graphics"			f.menu "Graphics"
-    " Multimedia"		f.menu "Multimedia"
-    " System"			f.menu "System"
-    " Misc"			f.menu "Misc"
-    " Applications"             f.exec "thunar /usr/share/applications/ &"
-}
-menu "Multimedia"
-{
-   "VLC"          f.exec "vlc &"
+  "eyes"      f.exec "xeyes&"
+  "star wars" f.exec "xterm -geometry 80x25 -fn -*-fixed-medium-*-*-*-24-*-*-*-*-*-*-1 -e telnet towel.blinkenlights.nl &"
+  "BB"        f.exec "bb &"
+  "clock"     f.exec "xclock &"
+  "vidtun"    f.exec "xvidtune &"
+  "matrix"    f.exec "xterm -e cmatrix &"
 }
 
-menu "System" 
+# Workspace submenu: Misc apps
+menu "miscapps"
 {
-  "XTerm"         f.exec "xterm -fn -misc-fixed-medium-r-*-*-18-*-*-*-*-*-iso10646-1 &"
-  "Small XTerm"   f.exec "xterm &"
-  "X-Large XTerm" f.exec "xterm -geometry 80x30 -fn -*-fixed-medium-*-*-*-24-*-*-*-*-*-*-1 &"
-  ""              f.nop
-  "Browser"       f.exec "dillo &"
-  "Links2"        f.exec "links2 -g &"
-  "File Manager"  f.exec "thunar &"
-  ""              f.nop
-  "Volume Mixer"  f.exec "xterm -e alsamixer --device pulse &"
-  "Audio Panel"   f.exec "pavucontrol &"
-  "HTop"          f.exec "xterm -e htop &"
-
-}
-
-menu "Misc"
-{
+   "Firefox"     f.exec "firefox-esr &"
    "xbiff"	 f.exec "xbiff &"
    "console"     f.exec "xconsole &"
+   "xedit"       f.exec "xedit &"
    "KeyboardSet" f.exec "xkbset-gui &"
    "xditview"    f.exec "xditview &"
+   "Calculator"  f.exec "xcalc &"
    "xcutsel"     f.exec "xcutsel &"
    "Clipboard"   f.exec "xclipboard  &"
    "xsane"       f.exec "xsane &"
@@ -756,19 +739,11 @@ menu "Misc"
    "XGC"         f.exec "xgc &"
 }
 
-menu "Graphics"
+# Workspace submenu: Audio apps
+menu "audio"
 {
-  "star wars" f.exec "xterm -geometry 80x25 -fn -*-fixed-medium-*-*-*-24-*-*-*-*-*-*-1 -e telnet towel.blinkenlights.nl &"
-  "BB"        f.exec "bb &"
-  "vidtun"    f.exec "xvidtune &"
-  "matrix"    f.exec "xterm -e cmatrix &"
+   "VLC"          f.exec "vlc &"
 }
-
-menu "Games"
-{
-    "Ascii patrol" 	      f.exec "xterm -e ascii-patrol &"
-}
-
 
 menu "deskutils"
 {
@@ -777,10 +752,8 @@ menu "deskutils"
     " Text editor"		!"xedit &"
     ""				f.separator
     " XEyes"			!"xeyes &"
-    " OpenGL Gears"		!"glxgears &"
     " Spinning cube"		!"ico -sleep 0.016 -obj cube -colors darkorange &"
     ""				f.separator
-    " Compositor (shadows)"	!"pkill picom; picom &"
     ""				f.separator
     " Magnify"			!"xmag -source 100x100 &"
     " Kill window"		!"xkill &"
@@ -791,14 +764,10 @@ menu "termutils"
     "Terminal utilities"	f.title
     ""				f.separator
     " VIsual Editor"		!"xterm -e vi &"
-    " Tetris"			!"xterm -e tetris &"
-    ""				f.separator
-    " Audio mixer"		!"xterm -e aiomixer &"
     ""				f.separator
     " Top processes"		!"xterm -e top &"
-    " I/O stats"		!"xterm -e 'sysstat iostat' &"
-    " Network stats"		!"xterm -e 'sysstat ifstat' &"
-    " Disk usage"		!"xterm -e 'sysstat df' &"
+    "Battery"       f.exec   "xterm -e sudo tlp-stat -b &"
+         
 }
 
 menu "NetBSD"
@@ -807,15 +776,31 @@ menu "NetBSD"
     ""				f.separator
     " Pin menu"                 f.pin
     ""                          f.separator
-    " Terminal"			!"uxterm &"
+    "Workspace"     f.title
+    "XTerm"         f.exec "xterm -fn -misc-fixed-medium-r-*-*-18-*-*-*-*-*-iso10646-1 &"
+    "Small XTerm"   f.exec "xterm &"
+    "X-Large XTerm" f.exec "xterm -geometry 80x30 -fn -*-fixed-medium-*-*-*-24-*-*-*-*-*-*-1 &"
+    ""              f.nop
+    "Browser"       f.exec "dillo &"
+    "Links2"        f.exec "links2 -g &"
+    "File Manager"  f.exec "thunar &"
+    ""              f.nop
+    "Volume Mixer"  f.exec "xterm -e alsamixer --device pulse &"
+    "Audio Panel"   f.exec "pavucontrol &"
+    "HTop"          f.exec "xterm -e htop &"
+    ""              f.nop
+    "Graphics"      f.menu "gfx" 
+    "Audio"         f.menu "audio"
+    "Applications"  f.menu "miscapps"
+    "All Apps'      f.exec "thunar /usr/share/applications/&"
     ""				f.separator
-    " Applications"		f.menu "appmenu"
     " Desktop utilities"	f.menu "deskutils"
     " Terminal utilities"	f.menu "termutils"
     ""				f.separator
     " Refresh"			f.refresh
     " Restart CTWM"		f.twmrc
     " Quit"			f.quit
+    "PowerOff"      f.exec  "sudo poweroff&"
 }
 
 menu "wm-ops" {
